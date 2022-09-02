@@ -24,10 +24,10 @@ def get_post(sub='pics'):
     current_time = datetime.now().strftime("%m-%d-%Y")
     # dictionary to store the fetched info
     redditInfo = {}
-    randomInt = random.randint(3, 40)
+    randomInt = random.randint(100, 999)
     # obtaining the top post info and passing it to a dict
     # Use the top of the week and go a few posts down
-    for submission in reddit.subreddit(sub).top('week', limit=randomInt):
+    for submission in reddit.subreddit(sub).top(time_filter='all', limit=randomInt):
         redditInfo['title'] = submission.title
         redditInfo['url'] = submission.url
         redditInfo['subreddit'] = submission.subreddit
@@ -74,7 +74,7 @@ def scrape_post_collect():
                 print('sleeping... ')
                 logging.info('sleeping...')
                 # sleep and repost in 24 hours
-                time.sleep(12000)
+                time.sleep(900)
                 # resubmit the post
                 print('Awake! posting to Reddit!')
                 submitted = submit_post(post_info)
